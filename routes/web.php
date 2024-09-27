@@ -8,3 +8,8 @@ Route::get('/', function () {
 });
 
 Route::get('/buku', [HomeController::class, 'index']);
+
+Route::get("/form",function () {
+    return view('form');
+});
+Route::post("/submit",[HomeController::class,"form"]);

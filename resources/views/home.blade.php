@@ -163,6 +163,13 @@
         </table>
     </div>
 
+    <!-- Tampilkan pesan dari form jika ada -->
+    @if(session('message'))
+        <div class="alert alert-danger mt-4" style="background-color:#faecf4; ">
+            <h4>Pesan dari Form:</h4>
+            <p>{{ session('message') }}</p>
+        </div>
+    @endif
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
