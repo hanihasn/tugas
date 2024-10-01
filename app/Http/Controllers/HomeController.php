@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
 {
@@ -33,5 +35,37 @@ class HomeController extends Controller
 
         // Redirect ke halaman home
         return redirect('/buku');
+    }
+
+    public function store()
+    {
+        $Product = new Product();
+        $Product->nama = "Laptop";
+        $Product->harga = 10000;
+        $Product->stok = 10;
+        $Product->deskripsi = "Laptop murah";
+        $Product->save();
+        return ("data sukses dikirim");
+    }
+
+    public function store2()
+    {
+        $Product = new Product();
+        $Product->nama = "Laptop Asus";
+        $Product->harga = 100000;
+        $Product->stok = 10;
+        $Product->deskripsi = "Laptop murah";
+        $Product->save();
+        return ("data sukses dikirim");
+    }
+
+    public function show()
+    {
+        $Products = Product::all();
+
+        // Mengambil nama kolom dari tabel 'products'
+        $columns = Schema::getColumnListing('products');
+
+        return view("tableProduct", compact('Products', 'columns'));
     }
 }
