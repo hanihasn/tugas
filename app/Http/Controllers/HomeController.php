@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\Schema;
+
 
 class HomeController extends Controller
 {
@@ -59,13 +59,47 @@ class HomeController extends Controller
         return ("data sukses dikirim");
     }
 
+    public function store33()
+    {
+        $Product = new Product();
+        $Product->nama = "Laptop Lenovo";
+        $Product->harga = 1000011;
+        $Product->stok = 155;
+        $Product->deskripsi = "Laptop murah lagi lagi";
+        $Product->save();
+        return ("data sukses dikirim");
+    }
+
     public function show()
     {
         $Products = Product::all();
-
-        // Mengambil nama kolom dari tabel 'products'
-        $columns = Schema::getColumnListing('products');
-
-        return view("tableProduct", compact('Products', 'columns'));
+        return view("tableProduct",compact("Products"));
     }
+
+    public function edit($id) {
+        $Product = Product::findOrFail($id);
+
+        return view("editProduct",compact("Product"));
+    }
+
+    public function update(Request $request, $id) {
+        $Product = Product::findOrFail($id);
+
+        $Product->nama = $request->nama;
+        $Product->harga = $request->harga;
+        $Product->stok = $request->stok;
+        $Product->deskripsi = $request->deskripsi;
+        $Product->save();
+
+        return redirect('/show');
+    }
+
+    public function destroy($id) {
+        $Product = Product::findOrFail($id);
+        $Product->delete();
+
+        return redirect('/show');
+    }
+
+
 }

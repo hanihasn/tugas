@@ -25,6 +25,11 @@
         h1 {
             text-align: center;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -32,17 +37,33 @@
     <table>
         <thead>
             <tr>
-                @foreach ($columns as $column)
-                    <th>{{ ucfirst($column) }}</th>
-                @endforeach
+              <th>Nama</th>
+              <th>Harga</th>
+              <th>Stok</th>
+              <th>Deskripsi</th>
+              <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($Products as $Product)
                 <tr>
-                    @foreach ($columns as $column)
-                        <td>{{ $Product->$column }}</td>
-                    @endforeach
+                    <td>{{ $Product->nama}}</td>
+                    <td>{{ $Product->harga}}</td>
+                    <td>{{ $Product->stok}}</td>
+                    <td>{{ $Product->deskripsi}}</td>
+                    <td>
+
+                <div class="button-container">
+                    <form action="/Products/{{ $Product->id }}/edit" method="GET">
+                        <button type="submit">Edit</button>
+                    </form>
+
+                    <form action="/Products/{{ $Product->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Hapus</button>
+                    </form>
+                </div>
                 </tr>
             @endforeach
         </tbody>
