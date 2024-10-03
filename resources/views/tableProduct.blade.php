@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Daftar Produk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         table {
-            width: 100%;
+            width: 80%;
+            max-width: 1000px;
+            margin: 20px auto;
             border-collapse: collapse;
         }
         th, td {
             border: 1px solid #060606;
-            padding: 8px;
+            padding: 6px;
             text-align: left;
         }
         th {
@@ -30,6 +33,23 @@
             gap: 10px;
             justify-content: center;
         }
+         .pagination {
+            justify-content: center;
+            display: flex;
+            margin: 20px 0;
+        }
+        .pagination .page-link {
+            background-color: #f8d2e3;
+            color: #000;
+        }
+        .pagination .page-link:hover {
+            background-color: #e0a3b4;
+            color: #fff;
+        }
+        .pagination .active .page-link {
+            background-color: #e0a3b4;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -37,6 +57,7 @@
     <table>
         <thead>
             <tr>
+              <th>No</th>
               <th>Nama</th>
               <th>Harga</th>
               <th>Stok</th>
@@ -45,8 +66,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($Products as $Product)
+            @foreach ($Products as $index => $Product)
                 <tr>
+                     <td>{{ $index + $Products->firstItem() }}</td>
                     <td>{{ $Product->nama}}</td>
                     <td>{{ $Product->harga}}</td>
                     <td>{{ $Product->stok}}</td>
@@ -68,5 +90,10 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pagination">
+        {{ $Products->links() }}
+    </div>
 </body>
+
 </html>

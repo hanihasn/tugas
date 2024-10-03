@@ -72,8 +72,8 @@ class HomeController extends Controller
 
     public function show()
     {
-        $Products = Product::all();
-        return view("tableProduct",compact("Products"));
+        $Products = Product::Paginate(4);
+        return view("tableProduct", compact("Products"));
     }
 
     public function edit($id) {
