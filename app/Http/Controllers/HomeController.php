@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
 
 
 class HomeController extends Controller
@@ -37,15 +38,27 @@ class HomeController extends Controller
         return redirect('/buku');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $Product = new Product();
-        $Product->nama = "Laptop";
-        $Product->harga = 10000;
-        $Product->stok = 10;
-        $Product->deskripsi = "Laptop murah";
-        $Product->save();
-        return ("data sukses dikirim");
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:2',
+            'stok' => 'required|integer|min:50',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $product = new Product();
+        $product->nama = $request->nama;
+        $product->harga = $request->harga;
+        $product->stok = $request->stok;
+        $product->deskripsi = $request->deskripsi;
+        $product->save();
+
+        return redirect('/show');
     }
 
     public function store2()
@@ -101,5 +114,8 @@ class HomeController extends Controller
         return redirect('/show');
     }
 
+    public function input() {
+        return view("inputProduct");
+    }
 
 }
