@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RelasiController;
+use App\Http\Controllers\SchoolController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,3 +31,5 @@ Route::get("/input", [HomeController::class, "input"]);
 Route::get("/ktp",[RelasiController::class,"index"]);
 Route::get("/pengguna/create", [RelasiController::class, "create"]);
 Route::post("/pengguna/store", [RelasiController::class, "store"]);
+
+Route::get("/school",[SchoolController::class,"index"]);
