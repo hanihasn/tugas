@@ -12,7 +12,7 @@
     @if ($errors->any())
         <p style="color:red">
             <ul>
-                @foreach ($erros->all() as $Error )
+                @foreach ($errors->all() as $Error )
                     <li>{{ $Error }}</li>
                 @endforeach
             </ul>

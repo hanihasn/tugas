@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RelasiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,3 +26,7 @@ Route::put('/Products/{id}', [HomeController::class, 'update']);
 Route::delete('/Products/{id}', [HomeController::class, 'destroy']);
 
 Route::get("/input", [HomeController::class, "input"]);
+
+Route::get("/ktp",[RelasiController::class,"index"]);
+Route::get("/pengguna/create", [RelasiController::class, "create"]);
+Route::post("/pengguna/store", [RelasiController::class, "store"]);
