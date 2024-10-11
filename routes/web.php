@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RelasiController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\SekolahController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,3 +34,4 @@ Route::get("/pengguna/create", [RelasiController::class, "create"]);
 Route::post("/pengguna/store", [RelasiController::class, "store"]);
 
 Route::get("/school",[SchoolController::class,"index"]);
+Route::get("/sekolah", [SekolahController::class, "index"]);
