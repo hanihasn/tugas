@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RelasiController;
 use App\Http\Controllers\SchoolController;
@@ -35,3 +36,5 @@ Route::post("/pengguna/store", [RelasiController::class, "store"]);
 
 Route::get("/school",[SchoolController::class,"index"]);
 Route::get("/sekolah", [SekolahController::class, "index"]);
+Route::get("/download", [pdfController::class, "generatePDF"]);
+Route::get("/stream", [pdfController::class, "streamPDF"]);
